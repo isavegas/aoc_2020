@@ -1,5 +1,5 @@
-# aoc_2019
+# aoc_2020
 
-[Advent of Code 2019](https://adventofcode.com/2019)
+[Advent of Code 2020](https://adventofcode.com/2019)
 
-My private [Leaderboard](https://adventofcode.com/2019/leaderboard/private/view/546795)
+My private [Leaderboard](https://adventofcode.com/2020/leaderboard/private/view/588715)
