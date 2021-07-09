@@ -4,7 +4,7 @@ use lazy_static::lazy_static;
 
 pub struct Day03;
 
-const INPUT: &'static str = include_str!("../input/day_03.txt");
+const INPUT: &str = include_str!("../input/day_03.txt");
 
 lazy_static! {
     static ref TREE_MAP: TreeMap = parse_map(INPUT);
@@ -79,7 +79,7 @@ impl AoCDay for Day03 {
         ];
         Ok(slopes.iter()
             .map(tree_count)
-            .fold(1, |m, v| m * v)
+            .product::<usize>()
             .to_string())
     }
 }

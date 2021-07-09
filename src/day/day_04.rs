@@ -4,7 +4,7 @@ use lazy_static::lazy_static;
 
 pub struct Day04;
 
-const INPUT: &'static str = include_str!("../input/day_04.txt");
+const INPUT: &str = include_str!("../input/day_04.txt");
 
 lazy_static! {
     static ref DATA: Vec<Passport> = parse(INPUT);
@@ -14,7 +14,7 @@ fn parse(input: &str) -> Vec<Passport> {
     let mut database = vec![];
     let mut passport = Passport::default();
     for line in input.trim().lines().map(str::trim) {
-        if line.len() == 0 {
+        if line.is_empty() {
             // Newline. Insert the last passport
             let mut insert_passport = Passport::default();
             std::mem::swap(&mut passport, &mut insert_passport);
@@ -81,8 +81,8 @@ impl Passport {
                 .as_ref()
                 .unwrap()
                 .parse::<usize>()
-                .unwrap_or_else(|_| 0);
-            if byr < 1920 || byr > 2002 {
+                .unwrap_or(0);
+            if !(1920..=2002).contains(&byr) {
                 return false;
             }
         }
@@ -93,8 +93,8 @@ impl Passport {
                 .as_ref()
                 .unwrap()
                 .parse::<usize>()
-                .unwrap_or_else(|_| 0);
-            if iyr < 2010 || iyr > 2020 {
+                .unwrap_or(0);
+            if !(2010..=2020).contains(&iyr) {
                 return false;
             }
         }
@@ -105,8 +105,8 @@ impl Passport {
                 .as_ref()
                 .unwrap()
                 .parse::<usize>()
-                .unwrap_or_else(|_| 0);
-            if eyr < 2020 || eyr > 2030 {
+                .unwrap_or(0);
+            if !(2020..=2030).contains(&eyr) {
                 return false;
             }
         }
@@ -118,13 +118,13 @@ impl Passport {
             }
             let hgt = hgt_v[..hgt_v.len() - 2]
                 .parse::<usize>()
-                .unwrap_or_else(|_| 0);
+                .unwrap_or(0);
             if hgt_v.ends_with("cm") {
-                if hgt < 150 || hgt > 193 {
+                if !(150..=193).contains(&hgt) {
                     return false;
                 }
             } else if hgt_v.ends_with("in") {
-                if hgt < 59 || hgt > 76 {
+                if !(59..=76).contains(&hgt) {
                     return false;
                 }
             } else {
@@ -135,7 +135,7 @@ impl Passport {
         {
             let hcl_v = self.hcl.as_ref().unwrap();
             if hcl_v.len() != 7
-                || !hcl_v.starts_with("#")
+                || !hcl_v.starts_with('#')
                 || !hcl_v.chars().skip(1).all(|c| c.is_ascii_hexdigit())
             {
                 return false;
@@ -143,11 +143,8 @@ impl Passport {
         }
 
         {
-            if match self.ecl.as_ref().unwrap().as_str() {
-                "amb" | "blu" | "brn" | "gry" | "grn" | "hzl" | "oth" => false,
-                _ => true,
-            } {
-                return false;
+            if !matches!(self.ecl.as_ref().unwrap().as_str(), "amb" | "blu" | "brn" | "gry" | "grn" | "hzl" | "oth") {
+                return false
             }
         }
 

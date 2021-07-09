@@ -1,6 +1,7 @@
 macro_rules! template {
     () => {
-        r#"use crate::*;
+        r#"
+use aoc_core::{{bail, AoCDay, ErrorWrapper}};
 
 use lazy_static::lazy_static;
 

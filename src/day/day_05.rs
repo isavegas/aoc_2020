@@ -4,13 +4,13 @@ use lazy_static::lazy_static;
 
 pub struct Day05;
 
-const INPUT: &'static str = include_str!("../input/day_05.txt");
+const INPUT: &str = include_str!("../input/day_05.txt");
 
 lazy_static! {
     static ref DATA: Vec<Seat> = INPUT.lines().map(Seat::parse).collect();
 }
 
-fn bpart_index_flatten(bpart_index: &Vec<bool>) -> usize {
+fn bpart_index_flatten(bpart_index: &[bool]) -> usize {
     bpart_index.iter().rev().enumerate().map(|(i, b)| match b {
         false => 2_usize.pow(i as u32),
         true => 0,

@@ -2,9 +2,9 @@ use aoc_core::{bail, AoCDay, ErrorWrapper};
 
 use lazy_static::lazy_static;
 
-pub struct Day1;
+pub struct Day01;
 
-const INPUT: &'static str = include_str!("../input/day_01.txt");
+const INPUT: &str = include_str!("../input/day_01.txt");
 type Num = u64;
 
 lazy_static! {
@@ -26,7 +26,7 @@ fn valid3(a: &Num, b: &Num, c: &Num) -> Option<Num> {
     }
 }
 
-impl AoCDay for Day1 {
+impl AoCDay for Day01 {
     fn day(&self) -> usize {
         1
     }
@@ -38,10 +38,7 @@ impl AoCDay for Day1 {
         for (i, a) in EXPENSES.iter().enumerate() {
             if i < (EXPENSES.len() -  1) {
                 for b in EXPENSES.iter().skip(i + 1) {
-                    match valid2(a, b) {
-                        Some(m) => candidates.push(m),
-                        None => (),
-                    }
+                    if let Some(m) = valid2(a, b) { candidates.push(m) }
                 }
             }
         }
@@ -56,10 +53,7 @@ impl AoCDay for Day1 {
             if i < (EXPENSES.len() -  2) {
                 for b in EXPENSES.iter().skip(i + 1) {
                     for c in EXPENSES.iter().skip(i + 2) {
-                        match valid3(a, b, c) {
-                            Some(m) => candidates.push(m),
-                            None => (),
-                        }
+                        if let Some(m) = valid3(a, b, c) { candidates.push(m) }
                     }
                 }
             }
@@ -72,5 +66,5 @@ impl AoCDay for Day1 {
 }
 
 pub fn get_day() -> Box<dyn AoCDay> {
-    Box::new(Day1)
+    Box::new(Day01)
 }

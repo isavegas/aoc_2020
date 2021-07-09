@@ -4,7 +4,7 @@ use lazy_static::lazy_static;
 
 pub struct Day06;
 
-const INPUT: &'static str = include_str!("../input/day_06.txt");
+const INPUT: &str = include_str!("../input/day_06.txt");
 
 lazy_static! {
     static ref DATA: Vec<Vec<bool>> = parse(INPUT);

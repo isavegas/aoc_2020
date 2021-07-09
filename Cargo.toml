@@ -1,6 +1,6 @@
 [package]
 name = "aoc_2020"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Kenzi Jeanis <isavegas2006@gmail.com>"]
 edition = "2018"
 default-run = "aoc_2020"
@@ -10,4 +10,7 @@ maplit = "1.0.2"
 lazy_static = "1.4.0"
 automod = "1.0.0"
 #num = "0.3.1"
+aoc_core = { git = "https://github.com/isavegas/aoc_core", tag = "v0.1.6" }
+
+[build-dependencies]
 aoc_core = { git = "https://github.com/isavegas/aoc_core", tag = "v0.1.6" }

@@ -5,7 +5,7 @@ use lazy_static::lazy_static;
 pub struct Day02;
 
 type Num = usize;
-const INPUT: &'static str = include_str!("../input/day_02.txt");
+const INPUT: &str = include_str!("../input/day_02.txt");
 
 lazy_static! {
     static ref DATABASE: Vec<Entry> = parse(INPUT);
@@ -19,6 +19,8 @@ struct Entry {
     pub password: String,
 }
 
+// TODO: Rewrite this ungodly function
+#[allow(clippy::unnecessary_unwrap)]
 fn parse_line(line: &str) -> Option<Entry> {
     match line.find(':') {
         Some(c) => {
@@ -34,6 +36,7 @@ fn parse_line(line: &str) -> Option<Entry> {
                             let (req_min, req_min_post) = req_range.split_at(h);
                             let min = req_min.parse::<Num>();
                             let max = req_min_post[1..].parse::<Num>();
+                            // TODO: `#![feature(let_chains)]` doesn't work atm. Try again later?
                             if req_char.is_some() && min.is_ok() && max.is_ok() {
                                 Some(Entry {
                                     required_character: req_char.unwrap(),
@@ -59,7 +62,7 @@ fn parse_line(line: &str) -> Option<Entry> {
 fn parse(input: &str) -> Vec<Entry> {
     input.lines()
         .map(str::trim)
-        .filter(|f| f.len() > 0)
+        .filter(|f| !f.is_empty())
         .map(parse_line)
         .map(Option::unwrap)
         .collect()
