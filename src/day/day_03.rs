@@ -1,6 +1,5 @@
-use crate::*;
+use aoc_core::{AoCDay, ErrorWrapper, Vec2};
 
-use crate::Vec2;
 use lazy_static::lazy_static;
 
 pub struct Day03;
@@ -62,7 +61,7 @@ impl TreeMap {
 
 impl AoCDay for Day03 {
     fn day(&self) -> usize {
-        03
+        3
     }
     fn expected(&self) -> (Option<&'static str>, Option<&'static str>) {
         (Some("176"), Some("5872458240"))

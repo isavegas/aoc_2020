@@ -1,4 +1,4 @@
-use crate::*;
+use aoc_core::{AoCDay, ErrorWrapper};
 
 use lazy_static::lazy_static;
 
@@ -44,7 +44,7 @@ impl Seat {
 
 impl AoCDay for Day05 {
     fn day(&self) -> usize {
-        05
+        5
     }
     fn expected(&self) -> (Option<&'static str>, Option<&'static str>) {
         (Some("861"), Some("633"))

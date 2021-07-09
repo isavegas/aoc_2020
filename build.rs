@@ -6,7 +6,7 @@ use std::path::Path;
 macro_rules! get_days_template {
     () => {
         r#"
-use crate::AoCDay;
+use aoc_core::AoCDay;
 
 pub fn get_days() -> Vec<Box<dyn AoCDay>> {{
     vec![

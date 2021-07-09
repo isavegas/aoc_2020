@@ -1,4 +1,4 @@
-use crate::*;
+use aoc_core::{bail, AoCDay, ErrorWrapper};
 
 use lazy_static::lazy_static;
 
@@ -8,7 +8,7 @@ const INPUT: &'static str = include_str!("../input/day_01.txt");
 type Num = u64;
 
 lazy_static! {
-    static ref EXPENSES: Vec<Num> = crate::parse::numbers(INPUT);
+    static ref EXPENSES: Vec<Num> = aoc_core::parse::numbers(INPUT);
 }
 
 fn valid2(a: &Num, b: &Num) -> Option<Num> {

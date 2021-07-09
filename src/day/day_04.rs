@@ -1,4 +1,4 @@
-use crate::*;
+use aoc_core::{AoCDay, ErrorWrapper};
 
 use lazy_static::lazy_static;
 
@@ -164,7 +164,7 @@ impl Passport {
 
 impl AoCDay for Day04 {
     fn day(&self) -> usize {
-        04
+        4
     }
     fn expected(&self) -> (Option<&'static str>, Option<&'static str>) {
         (Some("235"), Some("194"))

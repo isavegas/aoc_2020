@@ -1,4 +1,4 @@
-use crate::*;
+use aoc_core::{AoCDay, ErrorWrapper};
 
 use lazy_static::lazy_static;
 
@@ -8,12 +8,12 @@ type Num = u64;
 const INPUT: &'static str = include_str!("../input/day_07.txt");
 
 lazy_static! {
-    static ref DATA: Vec<Num> = crate::parse::numbers(INPUT);
+    static ref DATA: Vec<Num> = aoc_core::parse::numbers(INPUT);
 }
 
 impl AoCDay for Day07 {
     fn day(&self) -> usize {
-        07
+        7
     }
     fn expected(&self) -> (Option<&'static str>, Option<&'static str>) {
         (None, None)

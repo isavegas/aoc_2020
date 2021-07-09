@@ -1,4 +1,4 @@
-use crate::*;
+use aoc_core::{AoCDay, ErrorWrapper};
 
 use lazy_static::lazy_static;
 
@@ -20,7 +20,7 @@ fn parse(input: &str) -> Vec<Vec<bool>> {
 
 impl AoCDay for Day06 {
     fn day(&self) -> usize {
-        06
+        6
     }
     fn expected(&self) -> (Option<&'static str>, Option<&'static str>) {
         (None, None)
