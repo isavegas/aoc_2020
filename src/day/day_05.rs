@@ -1,14 +1,6 @@
 use aoc_core::{AoCDay, ErrorWrapper};
 
-use lazy_static::lazy_static;
-
 pub struct Day05;
-
-const INPUT: &str = include_str!("../input/day_05.txt");
-
-lazy_static! {
-    static ref DATA: Vec<Seat> = INPUT.lines().map(Seat::parse).collect();
-}
 
 fn bpart_index_flatten(bpart_index: &[bool]) -> usize {
     bpart_index.iter().rev().enumerate().map(|(i, b)| match b {
@@ -49,13 +41,13 @@ impl AoCDay for Day05 {
     fn expected(&self) -> (Option<&'static str>, Option<&'static str>) {
         (Some("861"), Some("633"))
     }
-    fn part1(&self) -> Result<String, ErrorWrapper> {
-        Ok(DATA.iter().map(Seat::id).max().unwrap().to_string())
+    fn part1(&self, input: &str) -> Result<String, ErrorWrapper> {
+        Ok(input.lines().map(Seat::parse).map(|s| s.id()).max().unwrap().to_string())
     }
-    fn part2(&self) -> Result<String, ErrorWrapper> {
+    fn part2(&self, input: &str) -> Result<String, ErrorWrapper> {
         // true == empty. Simplifies logic in iter chain.
         let mut flat = vec![true; 128 * 8];
-        for id in DATA.iter().map(Seat::id) {
+        for id in input.lines().map(Seat::parse).map(|s| s.id()) {
             flat[id] = false;
         }
         Ok(flat.iter().enumerate().skip_while(|(_, v)| **v).find(|(_, v)| **v).unwrap().0.to_string())

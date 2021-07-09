@@ -1,14 +1,6 @@
 use aoc_core::{AoCDay, ErrorWrapper};
 
-use lazy_static::lazy_static;
-
 pub struct Day04;
-
-const INPUT: &str = include_str!("../input/day_04.txt");
-
-lazy_static! {
-    static ref DATA: Vec<Passport> = parse(INPUT);
-}
 
 fn parse(input: &str) -> Vec<Passport> {
     let mut database = vec![];
@@ -166,11 +158,11 @@ impl AoCDay for Day04 {
     fn expected(&self) -> (Option<&'static str>, Option<&'static str>) {
         (Some("235"), Some("194"))
     }
-    fn part1(&self) -> Result<String, ErrorWrapper> {
-        Ok(DATA.iter().filter(|p| !p.missing()).count().to_string())
+    fn part1(&self, input: &str) -> Result<String, ErrorWrapper> {
+        Ok(parse(input).iter().filter(|p| !p.missing()).count().to_string())
     }
-    fn part2(&self) -> Result<String, ErrorWrapper> {
-        Ok(DATA.iter().filter(|p| p.valid()).count().to_string())
+    fn part2(&self, input: &str) -> Result<String, ErrorWrapper> {
+        Ok(parse(input).iter().filter(|p| p.valid()).count().to_string())
     }
 }
 

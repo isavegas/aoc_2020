@@ -1,15 +1,8 @@
 use aoc_core::{bail, AoCDay, ErrorWrapper};
 
-use lazy_static::lazy_static;
-
 pub struct Day01;
 
-const INPUT: &str = include_str!("../input/day_01.txt");
 type Num = u64;
-
-lazy_static! {
-    static ref EXPENSES: Vec<Num> = aoc_core::parse::numbers(INPUT);
-}
 
 fn valid2(a: &Num, b: &Num) -> Option<Num> {
     if a + b == 2020 {
@@ -33,11 +26,12 @@ impl AoCDay for Day01 {
     fn expected(&self) -> (Option<&'static str>, Option<&'static str>) {
         (Some("436404"), Some("274879808"))
     }
-    fn part1(&self) -> Result<String, ErrorWrapper> {
+    fn part1(&self, input: &str) -> Result<String, ErrorWrapper> {
+        let expenses = aoc_core::parse::numbers(input);
         let mut candidates = vec![];
-        for (i, a) in EXPENSES.iter().enumerate() {
-            if i < (EXPENSES.len() -  1) {
-                for b in EXPENSES.iter().skip(i + 1) {
+        for (i, a) in expenses.iter().enumerate() {
+            if i < (expenses.len() -  1) {
+                for b in expenses.iter().skip(i + 1) {
                     if let Some(m) = valid2(a, b) { candidates.push(m) }
                 }
             }
@@ -47,12 +41,13 @@ impl AoCDay for Day01 {
             None => bail!("Unable to find maximum!".to_string()),
         }
     }
-    fn part2(&self) -> Result<String, ErrorWrapper> {
+    fn part2(&self, input: &str) -> Result<String, ErrorWrapper> {
+        let expenses = aoc_core::parse::numbers(input);
         let mut candidates = vec![];
-        for (i, a) in EXPENSES.iter().enumerate() {
-            if i < (EXPENSES.len() -  2) {
-                for b in EXPENSES.iter().skip(i + 1) {
-                    for c in EXPENSES.iter().skip(i + 2) {
+        for (i, a) in aoc_core::parse::numbers(input).iter().enumerate() {
+            if i < (expenses.len() -  2) {
+                for b in expenses.iter().skip(i + 1) {
+                    for c in expenses.iter().skip(i + 2) {
                         if let Some(m) = valid3(a, b, c) { candidates.push(m) }
                     }
                 }

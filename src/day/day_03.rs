@@ -1,14 +1,6 @@
 use aoc_core::{AoCDay, ErrorWrapper, Vec2};
 
-use lazy_static::lazy_static;
-
 pub struct Day03;
-
-const INPUT: &str = include_str!("../input/day_03.txt");
-
-lazy_static! {
-    static ref TREE_MAP: TreeMap = parse_map(INPUT);
-}
 
 fn parse_map(input: &str) -> TreeMap {
     let mut map = TreeMap::default();
@@ -35,11 +27,11 @@ struct TreeMap {
     pub data: Vec<Vec<Entity>>
 }
 
-fn tree_count(slope: &Vec2<usize>) -> usize {
+fn tree_count(tree_map: &TreeMap, slope: &Vec2<usize>) -> usize {
     let mut location = Vec2::default();
     let mut trees = 0;
-    while location.y < TREE_MAP.height() {
-        match TREE_MAP.get(location).expect("Out of bounds") {
+    while location.y < tree_map.height() {
+        match tree_map.get(location).expect("Out of bounds") {
             Entity::Open => (),
             Entity::Tree => trees += 1,
         }
@@ -66,10 +58,11 @@ impl AoCDay for Day03 {
     fn expected(&self) -> (Option<&'static str>, Option<&'static str>) {
         (Some("176"), Some("5872458240"))
     }
-    fn part1(&self) -> Result<String, ErrorWrapper> {
-        Ok(tree_count(&Vec2::new(3, 1)).to_string())
+    fn part1(&self, input: &str) -> Result<String, ErrorWrapper> {
+        Ok(tree_count(&parse_map(input), &Vec2::new(3, 1)).to_string())
     }
-    fn part2(&self) -> Result<String, ErrorWrapper> {
+    fn part2(&self, input: &str) -> Result<String, ErrorWrapper> {
+        let tree_map = parse_map(input);
         let slopes = vec![
             Vec2::new(1, 1),
             Vec2::new(3, 1),
@@ -78,7 +71,7 @@ impl AoCDay for Day03 {
             Vec2::new(1, 2),
         ];
         Ok(slopes.iter()
-            .map(tree_count)
+            .map(|s| tree_count(&tree_map, s))
             .product::<usize>()
             .to_string())
     }
