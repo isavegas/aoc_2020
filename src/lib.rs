@@ -1,4 +1,4 @@
-mod day;
+pub mod day;
 pub use day::get_days;
 
 mod input;
