@@ -1,4 +1,4 @@
-use aoc_core::{bail, AoCDay, ErrorWrapper};
+use aoc_core::{AoCDay, ErrorWrapper};
 use bitflags::bitflags;
 use std::collections::HashMap;
 

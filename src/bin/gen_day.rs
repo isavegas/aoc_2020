@@ -1,7 +1,6 @@
 macro_rules! template {
     () => {
-        r#"
-use aoc_core::{{bail, AoCDay, ErrorWrapper}};
+        r#"use aoc_core::{{AoCDay, ErrorWrapper}};
 
 pub struct Day{0};
 
@@ -10,6 +9,9 @@ type Num = u64;
 impl AoCDay for Day{0} {{
     fn day(&self) -> usize {{
         {0}
+    }}
+    fn expected(&self) -> (Option<&'static str>, Option<&'static str>) {{
+        (None, None)
     }}
     fn part1(&self, _input: &str) -> Result<String, ErrorWrapper> {{
         Err(ErrorWrapper::NotImplemented)
