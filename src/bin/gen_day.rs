@@ -1,4 +1,4 @@
-macro_rules! template {
+macro_rules! impl_template {
     () => {
         r#"use aoc_core::{{AoCDay, ErrorWrapper}};
 
@@ -28,9 +28,39 @@ pub fn get_day() -> Box<dyn AoCDay> {{
     };
 }
 
+macro_rules! test_template {
+    () => {
+        r##"use aoc_2020::day::day_{0}::get_day;
+
+const INPUT: &str = r#""#;
+
+#[test]
+pub fn part1_1() {{
+    assert_eq!(
+        get_day()
+            .part1(INPUT)
+            .expect("Error"),
+        "".to_string()
+    );
+}}
+
+#[test]
+pub fn part2_1() {{
+    assert_eq!(
+        get_day()
+            .part2(INPUT)
+            .expect("Error"),
+        "".to_string()
+    );
+}}
+"##;
+    }
+}
+
 use std::fs::OpenOptions;
 use std::io::{BufWriter, Write};
 
+// TODO: Clean up and put in aoc_core?
 pub fn main() {
     let args: Vec<String> = std::env::args().collect();
 
@@ -54,7 +84,7 @@ pub fn main() {
                     .open(day_path.clone())
                     .expect("Unable to create file"),
             );
-            write!(f, template!(), num_str).expect("Unable to write file");
+            write!(f, impl_template!(), num_str).expect("Unable to write file");
             println!("Output file created at {}", day_path);
             OpenOptions::new()
                 .create_new(true)
@@ -62,6 +92,20 @@ pub fn main() {
                 .open(input_path.clone())
                 .expect("Unable to create input file");
             println!("Input file created at {}", input_path);
+            let test_path = format!(
+                "{}/day_{}.rs",
+                concat!(env!("CARGO_MANIFEST_DIR"), "/tests"),
+                num_str
+            );
+            let mut f = BufWriter::new(
+                OpenOptions::new()
+                    .create_new(true)
+                    .write(true)
+                    .open(test_path.clone())
+                    .expect("Unable to create file"),
+            );
+            write!(f, test_template!(), num_str).expect("Unable to write file");
+            println!("Test file created at {}", test_path);
         }
     }
 }
