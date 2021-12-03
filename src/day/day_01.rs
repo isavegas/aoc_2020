@@ -27,7 +27,7 @@ impl AoCDay for Day01 {
         (Some("436404"), Some("274879808"))
     }
     fn part1(&self, input: &str) -> Result<String, ErrorWrapper> {
-        let expenses = aoc_core::parse::numbers(input);
+        let expenses = aoc_core::parse::<Num>(input);
         let mut candidates = vec![];
         for (i, a) in expenses.iter().enumerate() {
             if i < (expenses.len() -  1) {
@@ -42,9 +42,9 @@ impl AoCDay for Day01 {
         }
     }
     fn part2(&self, input: &str) -> Result<String, ErrorWrapper> {
-        let expenses = aoc_core::parse::numbers(input);
+        let expenses = aoc_core::parse::<Num>(input);
         let mut candidates = vec![];
-        for (i, a) in aoc_core::parse::numbers(input).iter().enumerate() {
+        for (i, a) in aoc_core::parse::<Num>(input).iter().enumerate() {
             if i < (expenses.len() -  2) {
                 for b in expenses.iter().skip(i + 1) {
                     for c in expenses.iter().skip(i + 2) {

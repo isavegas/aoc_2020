@@ -9,10 +9,9 @@ default-run = "aoc_2020"
 maplit = "1.0.2"
 lazy_static = "1.4.0"
 automod = "1.0.2"
-bitflags = "1.2.1"
-aoc_core = { git = "https://github.com/isavegas/aoc_core", tag = "v0.1.9" }
-#aoc_core = { path = "../core" }
+bitflags = "1.3.2"
+aoc_core = { path = "./aoc_core" }
 
 [build-dependencies]
-aoc_core = { git = "https://github.com/isavegas/aoc_core", tag = "v0.1.9" }
-#aoc_core = { path = "../core" }
+aoc_core = { path = "./aoc_core" }
+

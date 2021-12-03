@@ -1,5 +1,5 @@
 use aoc_core::{AoCDay, ErrorWrapper};
-use aoc_core::parse::numbers;
+use aoc_core::parse;
 
 pub struct Day09 {
     pub preamble_size: usize
@@ -42,11 +42,11 @@ impl AoCDay for Day09 {
         (Some("26134589"), Some("3535124"))
     }
     fn part1(&self, input: &str) -> Result<String, ErrorWrapper> {
-        let data = numbers::<Num>(input);
+        let data = parse::<Num>(input);
         Ok(self.validate(&data).expect("No weakness found").1.to_string())
     }
     fn part2(&self, input: &str) -> Result<String, ErrorWrapper> {
-        let data = numbers::<Num>(input);
+        let data = parse::<Num>(input);
         let invalid = self.validate(&data).expect("No weakness found").1;
         let mut weakness = 0;
         'outer: for a in 0..data.len()-1 {

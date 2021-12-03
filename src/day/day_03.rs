@@ -22,8 +22,6 @@ enum Entity {
 
 #[derive(Debug, Clone, Default)]
 struct TreeMap {
-    pub width: usize,
-    pub height: usize,
     pub data: Vec<Vec<Entity>>
 }
 
